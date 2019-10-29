@@ -2,12 +2,12 @@
 /**
  * Plugin Name: Gravity Forms: Section Tabs
  * Description: Allows the Gravity Forms sections to work as tabs.
- * Version: 1.0
- * Author: tyxla
- * Author URI: https://github.com/tyxla
+ * Version: 1.0a
+ * Author: Brian Lewis via tyxla
+ * Author URI: https://github.com/brianlewisio
  * License: GPL2
  * Requires at least: 3.8
- * Tested up to: 4.4.2
+ * Tested up to: 5.2.4
  */
 
 add_action( 'gform_loaded', 'gform_section_tabs_addon_registration', 5 );

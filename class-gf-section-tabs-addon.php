@@ -18,7 +18,7 @@ class GFSectionTabsAddon extends GFAddOn {
 	protected $_full_path = __FILE__;
 
 	// addon URL
-	protected $_url = "https://github.com/tyxla/gravity-forms-section-tabs";
+	protected $_url = "https://github.com/brianlewisio/gravity-forms-section-tabs";
 
 	// addon name
 	protected $_title = "Gravity Forms: Section Tabs";
