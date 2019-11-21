@@ -22,11 +22,13 @@ jQuery(function($) {
 			var firstTabWithErrors = -1;
 
 			// build tabs
+			$num = 0;
 			tabs.each(function(tabIndex) {
+				$num++;
 				var $this = $(this);
 
 				// add a tab head link for each tab
-				tabsHead.append('<a href="#">' + $this.find('.gsection_title').html() + '</a>');
+				tabsHead.append('<a href="#" class="section-'+ $num +'">' + $this.find('.gsection_title').html() + '</a>');
 
 				// move the corresponding fields to their tab body
 				var gformFields = $('<ul class="gform_fields">');
@@ -48,6 +50,20 @@ jQuery(function($) {
 			tabsHead.find('a').on('click', function(event) {
 				var $this = $(this);
 
+				// Remove button if last tab
+				if (($this.is(':last-of-type'))) {
+					if ($('.button-next').length !== 0) {
+						$('.button-next').remove();
+					}
+				}
+
+				// Add button if tab was removed and not on last tab
+				if ($('.gravity-forms-section-tabs-head a:last-child').hasClass('current')) {
+					if ($('.button-next').length === 0) {
+						$('.gform_footer').append('<a class="button-next button" href="#">Next</a>');
+					}
+				}
+
 				if ($this.hasClass('current')) {
 					return false;
 				}
@@ -59,6 +75,34 @@ jQuery(function($) {
 
 				event.preventDefault();
 			}).filter(':eq(' + firstTabWithErrors + ')').trigger('click');
+
+			// Add Next Button
+			$('.gform_footer').append('<a class="button-next button" href="#">Next</a>');
+
+			// Next button functionality
+			$('.gform_footer').on('click', '.button-next', function(e) {
+				e.preventDefault();
+				console.log('test');
+				
+				let current = $('.gravity-forms-section-tabs-head a.current');
+				$(current).next().trigger('click');
+
+				if ($('.gravity-forms-section-tabs-head a:last-child').hasClass('current')) {
+					$('.button-next').remove();
+				}
+			});
+
+			// Disable Submit Button Until Last Tab
+			$('.gform_footer input[type="submit"]').prop("disabled", true);
+			tabsHead.find('a').on('click', function(event) {
+				var $this = $(this);
+
+				if (($this.is(':last-of-type'))) {
+					$('.gform_footer input[type="submit"]').prop("disabled", false);
+				}
+
+			});
+
 
 			// mark the section tabs of this form as initialized
 			$form.addClass('gravity_forms_section_tabs_initialized');
