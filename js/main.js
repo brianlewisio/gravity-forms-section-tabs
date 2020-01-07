@@ -27,8 +27,8 @@ jQuery(function($) {
 				$num++;
 				var $this = $(this);
 
-				// add a tab head link for each tab
-				tabsHead.append('<a href="#" class="section-'+ $num +'">' + $this.find('.gsection_title').html() + '</a>');
+				// add the id as well so gf conditional sections still works
+				tabsHead.append('<a id="' + $this[0].id + '" href="#">' + $this.find('.gsection_title').html() + '</a>');
 
 				// move the corresponding fields to their tab body
 				var gformFields = $('<ul class="gform_fields">');
